@@ -1,5 +1,6 @@
-# Source: https://gist.github.com/GrovesD2/d2dbf1def86fddf4dcf6d9dcb0a8fec6#file-complex_candlestick-py
+import streamlit as st
 import pandas as pd
+import requests
 import plotly.io as pio
 import plotly.graph_objects as go
 import plotly.express as px
@@ -7,7 +8,7 @@ from plotly.subplots import make_subplots
 
 pio.renderers.default='browser'
 
-
+# Source: https://gist.github.com/GrovesD2/d2dbf1def86fddf4dcf6d9dcb0a8fec6#file-complex_candlestick-py
 def get_candlestick_plot(
         df: pd.DataFrame,
         ma1: int,
@@ -77,3 +78,14 @@ def get_candlestick_plot(
     )
     
     return fig
+
+# Get historical prices
+@st.cache(allow_output_mutation=True)
+def get_historical_data(coin):
+    resolution = 60 * 60 * 24
+    url = f'https://ftx.com/api/markets/{coin}/USD/candles?resolution={resolution}'
+    request = requests.get(url).json()
+    df = pd.DataFrame(request['result'])
+    df['date'] = pd.to_datetime(df['startTime']).dt.date
+    df = df.drop(columns=['startTime', 'time'])
+    return df
