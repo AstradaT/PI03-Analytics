@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import requests
-from draw_candlestick import get_candlestick_plot
+from modules import get_candlestick_plot, get_historical_data
 
 
 # Markets elegidos
@@ -26,18 +26,7 @@ col3.metric("High 24h", data['priceHigh24h'])
 val=int(data['volumeUsd24h'])
 st.metric("Volume", f'{val:,}') # Volumen de transacciones
 
-# Get historical prices
-@st.cache(allow_output_mutation=True)
-def get_historical_data():
-    resolution = 60 * 60 * 24
-    url = f'https://ftx.com/api/markets/{coin}/USD/candles?resolution={resolution}'
-    request = requests.get(url).json()
-    df = pd.DataFrame(request['result'])
-    df['date'] = pd.to_datetime(df['startTime']).dt.date
-    df = df.drop(columns=['startTime', 'time'])
-    return df
-
-df = get_historical_data()
+df = get_historical_data(coin)
 
 # Draw candlestick chart
 # Source: https://gist.github.com/GrovesD2/02477a448eaa94470f9572cd02b6d7ac#file-interactive_dash-py
