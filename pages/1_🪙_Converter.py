@@ -42,6 +42,6 @@ coin1 = col1.selectbox(
 coin2 = col1.selectbox(
     'To', coins, index=0)
 
-amount = col2.number_input("Amount", min_value=0, value=1)
+amount = col2.number_input("Amount", min_value=0.0, value=1.0)
 col2.metric("Converted", convert_currency(coin1, coin2, amount))
 
