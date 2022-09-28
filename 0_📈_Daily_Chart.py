@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import requests
-from datetime import datetime, date, time, timedelta
 from draw_candlestick import get_candlestick_plot
 
 
