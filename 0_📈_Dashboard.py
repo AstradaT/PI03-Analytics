@@ -64,7 +64,7 @@ df = df[-days_to_plot:]
 # Display the plotly chart on the dashboard
 st.plotly_chart(
     get_candlestick_plot(df, ma1, ma2, coin),
-    use_container_width = True,
+    use_container_width = True
 )
 
 variance = np.var(df['close'])
