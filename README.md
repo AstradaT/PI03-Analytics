@@ -53,7 +53,12 @@ volumeUsd24h<br>
 priceHigh24h<br>
 priceLow24h<br>
 
-### GET /markets/{market_name}
+### GET /markets/{market_name}/candles?resolution={resolution}
+startTime<br>
+open<br>
+close<br>
+high<br>
+low<br>
 
 
 ## Hecho Con
