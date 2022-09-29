@@ -12,7 +12,9 @@ coins = ['BTC', 'ETH', 'BNB', 'XRP', 'SOL',
 coin = st.sidebar.selectbox(
     'Coin', coins)
 
-st.title(f"Predict Future Price - {coin}")
+col1, col2 = st.columns([1,8])
+col1.image(f"img/{coin.lower()}.png", width=64)
+col2.title(f"Predict Future Price - {coin}")
 
 df = get_historical_data(coin)
 df = df[['date', 'close']]
