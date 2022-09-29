@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import pandas as pd
 from modules import get_historical_data
 
 
@@ -12,3 +13,13 @@ for coin in coins:
 
 for coin in crypto:
     print(coin, len(crypto[coin]))
+
+crypto_all = {}
+
+for coin in crypto:
+    crypto_all[coin] = crypto[coin]
+    crypto[coin] = crypto[coin][-350:]
+
+# Differencing
+for coin in crypto:
+    crypto[coin]['CloseDiff'] = crypto[coin]['close'].diff().fillna(0)
