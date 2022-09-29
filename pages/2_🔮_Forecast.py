@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-import requests
 from prophet import Prophet
 from prophet.plot import plot_plotly, plot_components_plotly
 from modules import get_historical_data
