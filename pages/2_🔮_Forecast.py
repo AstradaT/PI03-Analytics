@@ -10,7 +10,7 @@ coins = ['BTC', 'ETH', 'BNB', 'XRP', 'SOL',
     'DOGE', 'DOT', 'MATIC', 'TRX', 'AVAX']
 
 coin = st.sidebar.selectbox(
-    'Choose a Coin', coins)
+    'Coin', coins)
 
 st.title(f"Predict Future Price - {coin}")
 
@@ -20,7 +20,10 @@ df = df[['date', 'close']]
 df.columns = ["ds", "y"]
 m = Prophet()
 m.fit(df);
-future = m.make_future_dataframe(periods=365)
+
+days = st.sidebar.number_input("Days to predict", min_value=1, max_value=365, value=7)
+
+future = m.make_future_dataframe(periods=days)
 forecast = m.predict(future)
 
 st.plotly_chart(plot_plotly(m, forecast))
