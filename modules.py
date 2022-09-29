@@ -121,19 +121,12 @@ def draw_price_histories(coins):
         histories[coin] = get_historical_data(coin)
     
     fig = go.Figure()
-
-    #fig, ax = plt.subplots(figsize=(10,10))
     
     for coin in histories:
         fig.add_trace(go.Scatter(x=histories[coin]['date'], y=histories[coin]['close'], name=coin, mode="lines"))
-        #ax.plot(histories[coin]['date'], histories[coin]['close'], label=coin)
     
     fig.update_layout(
         title="Historical Prices", xaxis_title="Date", yaxis_title="Price"
     )
-    #ax.set_xlabel('Date')
-    #ax.set_ylabel('Price')
-    #ax.set_title('Price history')
-    #ax.legend()
 
     return fig
