@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 import requests
 import plotly.io as pio
 import plotly.graph_objects as go
-import plotly.express as px
 from plotly.subplots import make_subplots
 
 pio.renderers.default='browser'
@@ -89,3 +90,50 @@ def get_historical_data(coin):
     df['date'] = pd.to_datetime(df['startTime']).dt.date
     df = df.drop(columns=['startTime', 'time'])
     return df
+
+
+def draw_volumes(coins):
+    volumes = {}
+
+    for coin in coins:
+        url = f'https://ftx.com/api/markets/{coin}/USD'
+        request = requests.get(url).json()
+        volumes[coin] = request['result']['volumeUsd24h']
+
+    fig, ax = plt.subplots()
+
+    y_pos = np.arange(len(volumes))
+    error = np.random.rand(len(volumes))
+
+    ax.barh(y_pos, volumes.values(), xerr=error, align='center')
+    ax.set_yticks(y_pos, labels=volumes.keys())
+    ax.invert_yaxis()
+    ax.set_xlabel('Volume')
+    ax.set_title('Volumes of transactions past 24 hours')
+
+    return fig
+
+
+def draw_price_histories(coins):
+    histories = {}
+
+    for coin in coins:
+        histories[coin] = get_historical_data(coin)
+    
+    fig = go.Figure()
+
+    #fig, ax = plt.subplots(figsize=(10,10))
+    
+    for coin in histories:
+        fig.add_trace(go.Scatter(x=histories[coin]['date'], y=histories[coin]['close'], name=coin, mode="lines"))
+        #ax.plot(histories[coin]['date'], histories[coin]['close'], label=coin)
+    
+    fig.update_layout(
+        title="Historical Prices", xaxis_title="Date", yaxis_title="Price"
+    )
+    #ax.set_xlabel('Date')
+    #ax.set_ylabel('Price')
+    #ax.set_title('Price history')
+    #ax.legend()
+
+    return fig
