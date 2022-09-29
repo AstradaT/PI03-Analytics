@@ -7,12 +7,14 @@ from modules import get_candlestick_plot, get_historical_data
 
 # Markets elegidos
 coins = ['BTC', 'ETH', 'BNB', 'XRP', 'SOL',
-    'DOGE', 'DOT', 'MATIC', 'TRX', 'AVAX']
+    'DOGE', 'MATIC', 'TRX', 'LTC', 'UNI']
 
 coin = st.sidebar.selectbox(
     'Choose a Coin', coins)
 
-st.title(f"{coin} to USD - Daily Chart")
+col1, col2 = st.columns([1,8])
+col1.image(f"img\\{coin.upper()}.png", width=64)
+col2.title(f"{coin} to USD - Daily Chart")
 
 url = f'https://ftx.com/api/markets/{coin}/USD'
 request = requests.get(url).json()
