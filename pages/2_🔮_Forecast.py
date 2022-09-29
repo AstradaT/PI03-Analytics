@@ -7,7 +7,7 @@ from modules import get_historical_data
 
 # Markets elegidos
 coins = ['BTC', 'ETH', 'BNB', 'XRP', 'SOL',
-    'DOGE', 'DOT', 'MATIC', 'TRX', 'AVAX']
+    'DOGE', 'MATIC', 'TRX', 'LTC', 'UNI']
 
 coin = st.sidebar.selectbox(
     'Coin', coins)
