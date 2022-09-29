@@ -31,7 +31,8 @@
   <h3 align="center">Cryptocurrency Dashboard 🪙📈</h3>
 </div>
 
-
+## Live Deploy
+**https://astradat-pi03-analytics-0--dashboard-cplxbs.streamlitapp.com/**
 
 <!-- ABOUT THE PROJECT -->
 ## Sobre Este Proyecto
