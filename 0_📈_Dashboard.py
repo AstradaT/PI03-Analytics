@@ -5,7 +5,7 @@ import requests
 from modules import get_candlestick_plot, get_historical_data
 
 
-st.set_page_config(page_icon='🪙', layout='wide')
+st.set_page_config(page_icon=':shark:', layout='wide')
 
 # Markets elegidos
 coins = ['BTC', 'ETH', 'BNB', 'XRP', 'SOL',
