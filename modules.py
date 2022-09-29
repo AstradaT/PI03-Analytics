@@ -109,7 +109,7 @@ def draw_volumes(coins):
     ax.set_yticks(y_pos, labels=volumes.keys())
     ax.invert_yaxis()
     ax.set_xlabel('Volume')
-    ax.set_title('Volumes of transactions past 24 hours')
+    ax.set_title('Comparison of Volume of Transactions past 24 hours')
 
     return fig
 
@@ -126,7 +126,7 @@ def draw_price_histories(coins):
         fig.add_trace(go.Scatter(x=histories[coin]['date'], y=histories[coin]['close'], name=coin, mode="lines"))
     
     fig.update_layout(
-        title="Historical Prices", xaxis_title="Date", yaxis_title="Price"
+        title="Comparison of Historical Prices", xaxis_title="Date", yaxis_title="Price"
     )
 
     return fig
