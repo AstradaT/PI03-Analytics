@@ -26,8 +26,10 @@ data = pd.Series(request['result'])
 col1, col2, col3 = st.columns(3)
 price = data['price']
 col1.metric("Price", f'{price:,}', f"{round(data['change24h']*100,2)}%")
-col2.metric("Low 24h", data['priceLow24h'])
-col3.metric("High 24h", data['priceHigh24h'])
+low = data['priceLow24h']
+col2.metric("Low 24h", f'{low:,}')
+high =  data['priceHigh24h']
+col3.metric("High 24h", f'{high:,}')
 val=int(data['volumeUsd24h'])
 st.metric("Volume", f'{val:,}') # Volumen de transacciones
 
