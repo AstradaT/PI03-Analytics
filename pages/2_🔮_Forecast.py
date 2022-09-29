@@ -26,4 +26,4 @@ days = st.sidebar.number_input("Days to predict", min_value=1, max_value=365, va
 future = m.make_future_dataframe(periods=days)
 forecast = m.predict(future)
 
-st.plotly_chart(plot_plotly(m, forecast))
+st.plotly_chart(plot_plotly(m, forecast, ylabel='Price (USD)', xlabel='Days'))
