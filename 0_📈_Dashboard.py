@@ -24,7 +24,8 @@ data = pd.Series(request['result'])
 
 # Visualize coin data
 col1, col2, col3 = st.columns(3)
-col1.metric("Price", data['price'], f"{round(data['change24h']*100,2)}%")
+price = data['price']
+col1.metric("Price", f'{price:,}', f"{round(data['change24h']*100,2)}%")
 col2.metric("Low 24h", data['priceLow24h'])
 col3.metric("High 24h", data['priceHigh24h'])
 val=int(data['volumeUsd24h'])
