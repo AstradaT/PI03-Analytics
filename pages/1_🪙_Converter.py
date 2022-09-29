@@ -31,7 +31,7 @@ def convert_currency(from_coin, to_coin, amount):
 
 st.title("Currency Converter")
 
-coins = ['BTC', 'ETH', 'BNB', 'XRP', 'SOL',
+coins = ['USD', 'BTC', 'ETH', 'BNB', 'XRP', 'SOL',
     'DOGE', 'MATIC', 'TRX', 'LTC', 'UNI']
 
 col1, col2 = st.columns(2)
