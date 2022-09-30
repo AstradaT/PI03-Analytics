@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 from prophet import Prophet
-from prophet.plot import plot_plotly, plot_components_plotly
+from prophet.plot import plot_plotly
 from modules import get_historical_data
 
 
