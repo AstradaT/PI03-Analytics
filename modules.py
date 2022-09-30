@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 import requests
 import plotly.io as pio
 import plotly.graph_objects as go
+import plotly.express as px
 from plotly.subplots import make_subplots
 
 pio.renderers.default='browser'
@@ -93,23 +92,21 @@ def get_historical_data(coin):
 
 
 def draw_volumes(coins):
-    volumes = {}
+    df = pd.DataFrame(columns=['coin','volume'])
 
     for coin in coins:
         url = f'https://ftx.com/api/markets/{coin}/USD'
         request = requests.get(url).json()
-        volumes[coin] = request['result']['volumeUsd24h']
+        df.loc[len(df.index)] = [request['result']['baseCurrency'], request['result']['volumeUsd24h']]
 
-    fig, ax = plt.subplots()
+    fig = px.bar(df, x='volume', y='coin', orientation='h')
 
-    y_pos = np.arange(len(volumes))
-    error = np.random.rand(len(volumes))
-
-    ax.barh(y_pos, volumes.values(), xerr=error, align='center')
-    ax.set_yticks(y_pos, labels=volumes.keys())
-    ax.invert_yaxis()
-    ax.set_xlabel('Volume')
-    ax.set_title('Comparison of Volume of Transactions past 24 hours')
+    fig.update_layout(
+        title="Comparison of Volumes of Transactions last 24 hours", 
+        xaxis_title="Coin", 
+        yaxis_title="Volume 24h",
+        yaxis={'categoryorder':'total ascending'}
+    )
 
     return fig
 
