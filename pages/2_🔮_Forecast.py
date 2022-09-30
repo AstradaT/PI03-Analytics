@@ -27,4 +27,4 @@ if st.sidebar.button('Predict'):
     future = m.make_future_dataframe(periods=days)
     forecast = m.predict(future)
 
-    st.plotly_chart(plot_plotly(m, forecast, ylabel='Price (USD)', xlabel='Days'))
+    st.plotly_chart(plot_plotly(m, forecast, ylabel='Price (USD)', xlabel='Days'), use_container_width=True)
